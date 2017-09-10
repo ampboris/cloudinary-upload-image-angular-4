@@ -1,0 +1,19 @@
+.file-uploader-preview {
+    position: relative;
+}
+
+.file-uploader-preview-badge {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+
+label {
+    cursor: pointer;
+    margin: 0;
+}
+
+input[type=file] {
+    display: none;
+}
+
