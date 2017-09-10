@@ -14,7 +14,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() height = 100 ;
   @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
 
-  public data: any;
+  public cropperData: any;
   public cloudinaryData: CloudinaryImage;
   public fileUploadUniqueId: string;
   public uploading: boolean;
@@ -24,7 +24,7 @@ export class FileUploaderComponent implements OnInit {
     public cropperSettings: CropperSettings) {
 
       this.fileUploadUniqueId = 'file-upload-' + new Date().getTime();
-      this.data = {};
+      this.cropperData = {};
   }
 
   private initCropper() {
@@ -44,13 +44,13 @@ export class FileUploaderComponent implements OnInit {
     const image: any = new Image();
     const file: File = $event.target.files[0];
     const myReader: FileReader = new FileReader();
-    const that = this;
+    const self = this;
     
     this.cloudinaryData = null;
 
     myReader.onloadend = function (loadEvent: any) {
         image.src = loadEvent.target.result;
-        that.cropper.setImage(image);
+        self.cropper.setImage(image);
     };
 
     myReader.readAsDataURL(file);
@@ -63,10 +63,11 @@ export class FileUploaderComponent implements OnInit {
   uploadImage() {
     // NOTE: could have return observable and use async in template
     this.uploading = true;
-    const uploadRequest$ = this.fileUploaderService.uploadImage(this.data.image)
+    const uploadRequest$ = this.fileUploaderService.uploadImage(this.cropperData.image)
     .subscribe(
       (cloudinaryData: CloudinaryImage) => {
         this.cloudinaryData = cloudinaryData;
+        this.cropperData = {};
       },
       error => {
           console.error('This line is never called', error);

@@ -3,19 +3,19 @@
   <div class="bg-faded mb-3 d-flex justify-content-center align-items-center" 
        [ngStyle]="{'width': width * 2 + 'px','height': height + 'px'}">
     <div class="d-flex flex-row" 
-         [ngClass]="{'invisible': !data.image}"
+         [ngClass]="{'invisible': !cropperData.image}"
          *ngIf="!cloudinaryData && !uploading">
       <!-- CROPPER SECTION -->
-      <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+      <img-cropper #cropper [image]="cropperData" [settings]="cropperSettings"></img-cropper>
       <!-- PREVIEW SECTION -->
-      <div class="file-uploader-preview" *ngIf="data.image">
-        <img [src]="data.image" 
+      <div class="file-uploader-preview" *ngIf="cropperData.image">
+        <img [src]="cropperData.image" 
              [width]="cropperSettings.croppedWidth" 
              [height]="cropperSettings.croppedHeight">
         <span class="file-uploader-preview-badge badge badge-danger">PREVIEW</span>
       </div>
       <div class="file-uploader-preview-empty" 
-           *ngIf="!data.image" 
+           *ngIf="!cropperData.image" 
            [ngStyle]="{'width': width * 2 + 'px','height': height + 'px'}" 
            class="bg-info"></div>
       <!-- THUMBNAIL RESULT -->
@@ -33,8 +33,8 @@
   <div class="d-flex flex-row justify-content-center">
       <label 
           for="{{ fileUploadUniqueId }}" class="btn btn-primary">
-          <span *ngIf="!data.image">Select Image to Upload</span>
-          <span *ngIf="data.image">Replace Image</span>
+          <span *ngIf="!cropperData.image">Select Image to Upload</span>
+          <span *ngIf="cropperData.image">Replace Image</span>
       </label>
       <input type="file"
               [disabled]="uploading" 
@@ -42,7 +42,7 @@
               (change)="onFileSelected($event)">
   
       <button class="ml-3 btn btn-success" 
-              *ngIf="data.image" 
+              *ngIf="cropperData.image" 
               [disabled]="uploading" 
               (click)="uploadImage()">Upload Image</button>
   </div>
