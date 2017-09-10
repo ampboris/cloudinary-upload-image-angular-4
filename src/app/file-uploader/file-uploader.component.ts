@@ -70,7 +70,7 @@ export class FileUploaderComponent implements OnInit {
         this.cropperData = {};
       },
       error => {
-          console.error('This line is never called', error);
+          console.error('Error Uploading Image', error);
       },
       () => {
         this.uploading = false;
