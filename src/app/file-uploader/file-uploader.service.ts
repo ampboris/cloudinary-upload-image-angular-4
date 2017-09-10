@@ -3,9 +3,6 @@ import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CloudinaryImage } from './cloudinary.image.model';
 
-
-declare var jQuery: any, $: any;
-
 @Injectable()
 export class FileUploaderService {
 
