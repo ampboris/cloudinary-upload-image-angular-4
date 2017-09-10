@@ -1,3 +1,11 @@
+.bg-faded {
+    background-color: #f7f7f7
+}
+
+.badge-default {
+    background-color: #636c72;
+}
+
 .file-uploader-preview {
     position: relative;
 }
